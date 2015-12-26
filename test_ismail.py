@@ -60,15 +60,31 @@ class IsmailTest(unittest.TestCase):
         self.assertFalse(ismail('username@ab$z0_59'))
 
     # checking cond_h - Possible symbols for username a-z0-9"._- only. (!,:) symbols also possible but in special cases
-    # cond_k - Pair of quotes is possible only
-    # cond_l - Symbols !,: should go inside the quotes "!,:"
-    def test_cond_hkl(self):
+    def test_cond_h(self):
         self.assertTrue(ismail('a-f-z_0-59.w@doma.in'))
-        self.assertTrue(ismail('a-"f-z_0-59".w@doma.in'))
-        self.assertTrue(ismail('"!,:"a-f-z_0-59.w@doma.in'))
-        self.assertFalse(ismail('a-"f-z_0-59"."w@doma.in'))
-        self.assertFalse(ismail('"!,":a-"f-z_0-59".w@doma.in'))
+        self.assertTrue(ismail('a-f-z_0-59.w@doma.in'))
+        self.assertFalse(ismail('user-#-name@doma.in'))
+        self.assertFalse(ismail('user-&-name@doma.in'))
+        self.assertFalse(ismail('user-()-name@doma.in'))
+        self.assertFalse(ismail('user-?-name@doma.in'))
+        self.assertFalse(ismail('user-^-name@doma.in'))
 
+    # cond_k - Pair of quotes is possible only
+    def test_cond_k(self):
+        self.assertTrue(ismail('username""@doma.in'))
+        self.assertTrue(ismail('""username@doma.in'))
+        self.assertTrue(ismail('"username"@doma.in'))
+        self.assertFalse(ismail('"""username@doma.in'))
+        self.assertFalse(ismail('u"s"ern"ame@doma.in'))
+        self.assertFalse(ismail('"username@doma.in'))
+
+    # cond_l - Symbols !,: should go inside the quotes "!,:"
+    def test_cond_l(self):
+        self.assertTrue(ismail('"!,:"username@doma.in'))
+        self.assertTrue(ismail('"username!,:"@doma.in'))
+        self.assertFalse(ismail(':"username"@doma.in'))
+        self.assertFalse(ismail('"user"!"name"@doma.in'))
+        self.assertFalse(ismail('"username",@doma.in'))
 
 
 if __name__ == '__main__':

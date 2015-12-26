@@ -54,10 +54,8 @@ def ismail(email):
     check_array.append(len(name.split('"')) % 2 != 0)
 
     # cond_l - Symbols !,: should go inside the quotes "!,:"
-    print (name.split("\""))
-    inside_symbols = '!,:^"'
-    name_substr = (re.sub(r'".*[%s].*"' % inside_symbols, '', name))
-    check_array.append(not bool(re.search(r'[%s]' % inside_symbols, name_substr)))
+    sub_name = (''.join(name.split("\"")[::2]))
+    check_array.append(not bool(re.search(r'[!,:]',  sub_name)))
 
     # cond_m - Two dot in the row unexceptable for the username ".."
     check_array.append('..' not in name)
@@ -67,7 +65,3 @@ def ismail(email):
         return False
     else: return True
 
-ismail('"us"er"am"e@domain.sub')
-
-if __name__ == '__main__':
-    ismail('username@domain.sub')
