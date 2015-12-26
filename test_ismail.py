@@ -69,7 +69,7 @@ class IsmailTest(unittest.TestCase):
         self.assertFalse(ismail('user-?-name@doma.in'))
         self.assertFalse(ismail('user-^-name@doma.in'))
 
-    # cond_k - Pair of quotes is possible only
+    # checking cond_k - Pair of quotes is possible only
     def test_cond_k(self):
         self.assertTrue(ismail('username""@doma.in'))
         self.assertTrue(ismail('""username@doma.in'))
@@ -78,13 +78,19 @@ class IsmailTest(unittest.TestCase):
         self.assertFalse(ismail('u"s"ern"ame@doma.in'))
         self.assertFalse(ismail('"username@doma.in'))
 
-    # cond_l - Symbols !,: should go inside the quotes "!,:"
+    # checking cond_l - Symbols !,: should go inside the quotes "!,:"
     def test_cond_l(self):
         self.assertTrue(ismail('"!,:"username@doma.in'))
         self.assertTrue(ismail('"username!,:"@doma.in'))
         self.assertFalse(ismail(':"username"@doma.in'))
         self.assertFalse(ismail('"user"!"name"@doma.in'))
         self.assertFalse(ismail('"username",@doma.in'))
+
+    # checking cond_m - Two dot in the row unacceptable for the username ".."
+    def test_cond_m(self):
+        self.assertFalse(ismail('..username@doma.in'))
+        self.assertFalse(ismail('username..@doma.in'))
+        self.assertFalse(ismail('user..name@doma.in'))
 
 
 if __name__ == '__main__':

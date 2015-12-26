@@ -57,7 +57,7 @@ def ismail(email):
     sub_name = (''.join(name.split("\"")[::2]))
     check_array.append(not bool(re.search(r'[!,:]',  sub_name)))
 
-    # cond_m - Two dot in the row unexceptable for the username ".."
+    # cond_m - Two dot in the row unacceptable for the username ".."
     check_array.append('..' not in name)
 
 
