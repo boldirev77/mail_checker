@@ -33,12 +33,9 @@ def ismail(email):
     else: check_array.append(True)
 
     # cond_f - Domain parts cannot have "-" at the beginning or at the end of the domain part
-    try:
-        if '-' in ''.join([prt[0]+prt[-1] for prt in domain.split(".")]):
-            check_array.append(False)
-        else: check_array.append(True)
-    except IndexError:
-        pass
+    if True in [True if re.search(r'^[-]|[-]$', prt) else False for prt in domain.split(".")]:
+        check_array.append(False)
+    else: check_array.append(True)
 
     # cond_g - Possible symbols for domain a-z 0-9._- only
     if False in [True if re.search(r'^[a-z0-9._-]$', ch) else False for ch in domain]:

@@ -51,6 +51,7 @@ class IsmailTest(unittest.TestCase):
         self.assertFalse(ismail('username@do-'))
         self.assertFalse(ismail('username@dom.-in'))
         self.assertFalse(ismail('username@dom.ai-'))
+        self.assertFalse(ismail('username@-ai-'))
 
     # checking cond_g - Possible symbols for domain a-z 0-9._- only
     def test_cond_g(self):
