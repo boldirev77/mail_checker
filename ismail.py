@@ -33,7 +33,6 @@ def ismail(email):
                 else:
 
                     # cond_e - Dot should split domain on two or more none empty parts
-
                     if '.' in domain and 0 in [len(prt) for prt in domain.split(".")]:
                         return False
                     else:
@@ -67,7 +66,8 @@ def ismail(email):
                                             # cond_m - Two dot in the row unacceptable for the username ".."
                                             return '..' not in name
 
-
-   # if False in check_array:
-    #    return False
-    #else: return True
+if __name__ == '__main__':
+    if ismail(input('set Email : ')):
+        print('valid Email')
+    else:
+        print('input ERROR')
