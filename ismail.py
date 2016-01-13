@@ -38,18 +38,21 @@ def ismail(email):
                     else:
 
                         # cond_f - Domain parts cannot have "-" at the beginning or at the end of the domain part
-                        if True in [True if re.search(r'^[-]|[-]$', prt) else False for prt in domain.split(".")]:
-                            return False
+                        for prt in domain.split("."):
+                            if re.search(r'^[-]|[-]$', prt):
+                                return False
                         else:
 
                             # cond_g - Possible symbols for domain a-z 0-9._- only
-                            if False in [True if re.search(r'^[a-z0-9._-]$', ch) else False for ch in domain]:
-                                return False
+                            for ch in domain:
+                                if not re.search(r'^[a-z0-9._-]$', ch):
+                                    return False
                             else:
 
                                 # cond_h - Possible symbols for username a-z0-9"._-!,: only
-                                if False in [True if re.search(r'^[A-Za-z0-9"._!,:-]$', ch) else False for ch in name]:
-                                    return False
+                                for ch in name:
+                                    if not re.search(r'^[A-Za-z0-9"._!,:-]$', ch):
+                                        return False
                                 else:
 
                                     # cond_k - Pair of quotes is possible only
